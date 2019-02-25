@@ -1,0 +1,29 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Socket.io</title>
+</head>
+<body>
+  <h3>Communication avec socket.io</h3>
+
+  <p><input type="button" value="Embêter server" id="poke"></p>
+  
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io.connect('http://localhost:8080');
+    socket.on('message', function(message) {
+      alert('Server says: ' + message);
+    })
+
+    $('#poke').click(function() {
+      socket.emit('message', 'Hey man are you okay?');
+    })
+
+    var pseudo = prompt('Pseudo :');
+    socket.emit('petit_nouveau', pseudo);
+  </script>
+</body>
+</html>
